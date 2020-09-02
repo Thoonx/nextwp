@@ -12,7 +12,7 @@ const Post = ({ post }) => (
 	const posts = await res.json()
 
 	const paths = posts.map((post) => ({
-	  params: { id: post.id.toString(), revalidate: 1 }
+	  params: { id: post.id.toString()}
 	}))
 
 	return { paths, fallback: true }
@@ -23,8 +23,7 @@ const Post = ({ post }) => (
 	const res = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts/${params.id}`)
 	const post = await res.json()
 
-	return { props: { post },
-	  revalidate: 1 }
+	return { props: { post } }
   }
   
   export default Post
