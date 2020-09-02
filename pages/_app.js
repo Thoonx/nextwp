@@ -2,7 +2,7 @@
 //git init
 //sudo git remote add origin https://github.com/Thoonx/test1.git
 //git add .
-//git commit -m 'test'
+//git commit -m 'update'
 //git push -u origin master
 //git push -u origin master -f
 //git checkout dev

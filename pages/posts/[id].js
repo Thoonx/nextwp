@@ -7,14 +7,12 @@ const Post = ({ post }) => (
 
 </>
 )
-
-
   export async function getStaticPaths() {
 	const res = await fetch('https://antuncrnja.com/w/wp-json/wp/v2/posts')
 	const posts = await res.json()
 
 	const paths = posts.map((post) => ({
-	  params: { id: post.id.toString() },
+	  params: { id: post.id.toString(), revalidate: 1 }
 	}))
 
 	return { paths, fallback: true }
