@@ -1,3 +1,6 @@
+import { useRouter } from 'next/router';
+
+
 const Post = ({ post }) => (
 	<>
 <h1>{post.title.rendered}</h1>
@@ -31,8 +34,7 @@ const Post = ({ post }) => (
 	return { 
 		props: { 
 		post,
-	 }, 
-	 revalidate: 1,
+	 }
 	}
   }
   
