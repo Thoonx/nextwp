@@ -18,5 +18,4 @@ const App = ({ Component, pageProps, router }) => (
   </>
 )
 
-
 export default App
