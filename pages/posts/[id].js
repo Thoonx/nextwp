@@ -12,7 +12,8 @@ const Post = ({post}) => {
 			<h1>{post.title.rendered}</h1>
 			<small style={{marginBottom:'25px',display:'block'}}>{post.date.replace('T', ' ')}</small>
 			<img src={`https://antuncrnja.com/w/wp-content/uploads/${post.better_featured_image.media_details.file}`} />
-			<p dangerouslySetInnerHTML={{ __html: post.content.rendered }}></p>
+			<div dangerouslySetInnerHTML={ {__html: post.content.rendered } } />
+	
 			<p className="acf">ACF: {post.acf ? post.acf.neki : ''}</p>
 			
 		</Container>
@@ -38,8 +39,7 @@ const Post = ({post}) => {
 	return { 
 		props: { 
 		post,
-	 },
-	 revalidate: 1
+	 }
 	}
   }
   

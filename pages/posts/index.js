@@ -3,8 +3,9 @@ import Card from '../../components/Card'
 import Container from '../../components/Container'
 import Flex from '../../components/Flex'
 
-const Posts = ({ posts }) => (
-	
+
+const Posts = ({ posts }) => {
+	return(
 	  <Container>
 		  <Flex>
 					{posts.map((post) => (
@@ -21,7 +22,8 @@ const Posts = ({ posts }) => (
 		</Flex>
 		<button onClick={ () => router.push(`/posts?page=${page + 1}`)}>Next</button>
 	  </Container>
-	)
+)
+}
 
 
   export async function getStaticProps() {
