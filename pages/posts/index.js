@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Card from '../../components/Card'
-import Container from '../../components/Container'
+import ContainerFront from '../../components/ContainerFront'
 import Flex from '../../components/Flex'
 
 export async function getStaticProps() {
@@ -20,7 +20,7 @@ export async function getStaticProps() {
   function Blog({ posts }) {
 	return (
 		
-	  <Container>
+	  <ContainerFront>
 		  <Flex>
 					{posts.map((post) => (
 						<Card key={post.id}>
@@ -34,7 +34,7 @@ export async function getStaticProps() {
 					))}
 
 		</Flex>
-	  </Container>
+	  </ContainerFront>
 	)
   }
 

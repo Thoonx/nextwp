@@ -1,17 +1,41 @@
-import Head from 'next/head'
 import Link from 'next/link'
+import Head from 'next/head'
+import Card from '../components/Card'
+import ContainerFront from '../components/ContainerFront'
+import Flex from '../components/Flex'
 
+export async function getStaticProps() {
 
-const Home = () => (
+	const res = await fetch('https://antuncrnja.com/w/wp-json/wp/v2/posts')
+	const posts = await res.json()
+  
+	return {
+	  props: {
+		posts,
+	  },
+	  revalidate: 30
+	}
+  }
 
-    <div>
-      <Head>
-        <title>Next WP</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  function Blog({ posts }) {
+	return (
+		
+	  <ContainerFront>
+		  <Flex>
+					{posts.map((post) => (
+						<Card key={post.id}>
+						<Link href={ `/posts/${ post.id }` }>
+							<a  href={ `/posts/${ post.id }` }>
+								<p>{post.title.rendered}</p>
+								<img src={post.better_featured_image.media_details.sizes.medium.source_url} />
+							</a>
+						</Link>
+						</Card>
+					))}
 
-      <Link href={ `/posts/` }><a>Posts button</a></Link>
-    </div>
-  )
+		</Flex>
+	  </ContainerFront>
+	)
+  }
 
-  export default Home
+  export default Blog
