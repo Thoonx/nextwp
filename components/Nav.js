@@ -3,7 +3,6 @@ import Link from 'next/link'
 const Nav = () => (
     <ul>
         <li><Link href="/"><a href="/">Home</a></Link></li>
-        <li><Link href="/Home"><a href="/home">WP Home Page</a></Link></li>
         <li><Link href="/posts"><a href="/posts">Posts</a></Link></li>
 
         <style jsx>{`
@@ -25,8 +24,8 @@ const Nav = () => (
             list-style: none;
             display: inline-block;
         }
-        ul li:nth-child(even){
-            border-left: 1px solid #5254ff;
+        ul li:nth-child(odd){
+            
     border-right: 1px solid #5254ff;
         }
         `}</style>

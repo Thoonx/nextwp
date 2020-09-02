@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 
 
@@ -11,7 +10,7 @@ const Home = () => (
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Link href={ `/posts/` }><a>Posts</a></Link>
+      <Link href={ `/posts/` }><a>Posts button</a></Link>
     </div>
   )
 
