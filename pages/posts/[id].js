@@ -52,7 +52,7 @@ function Post({post}) {
 	  params: { id: post.id.toString() },
 	}))
 
-	return { paths, fallback: false }
+	return { paths, fallback: true }
   }
   
   export async function getStaticProps({ params }) {
@@ -63,8 +63,7 @@ function Post({post}) {
 	return { 
 		props: { 
 		post,
-	 },
-	 revalidate: 1
+	 }
 	}
   }
   
