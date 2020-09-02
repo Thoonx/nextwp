@@ -28,7 +28,8 @@ const Post = ({ post }) => (
 	const res = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts/${params.id}`)
 	const post = await res.json()
 
-	return { props: { post } }
+	return { props: { post },
+	  revalidate: 1 }
   }
   
   export default Post
