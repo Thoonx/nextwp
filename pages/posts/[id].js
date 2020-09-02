@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
  */
 
 
-function Post ({post}) {
+function Post({post}) {
 
 	const router = useRouter()
   
@@ -63,7 +63,8 @@ function Post ({post}) {
 	return { 
 		props: { 
 		post,
-	 }
+	 },
+	 revalidate: 1
 	}
   }
   
