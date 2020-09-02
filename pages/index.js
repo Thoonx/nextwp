@@ -6,7 +6,7 @@ import Flex from '../components/Flex'
 
 export async function getStaticProps() {
 
-	const res = await fetch('https://antuncrnja.com/w/wp-json/wp/v2/posts')
+	const res = await fetch('https://antuncrnja.com/w/wp-json/wp/v2/posts?per_page=4')
 	const posts = await res.json()
   
 	return {
@@ -14,13 +14,15 @@ export async function getStaticProps() {
 		posts,
 	  },
 	  revalidate: 30
-	}
+	  }
   }
 
   function Blog({ posts }) {
 	return (
 		
 	  <ContainerFront>
+      <div>
+      
 		  <Flex>
 					{posts.map((post) => (
 						<Card key={post.id}>
@@ -34,6 +36,7 @@ export async function getStaticProps() {
 					))}
 
 		</Flex>
+    </div>
 	  </ContainerFront>
 	)
   }

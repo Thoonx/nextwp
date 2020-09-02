@@ -4,7 +4,7 @@ const Card = ({children}) => (
 
 <style jsx>{`
 		div{
-			flex: 1 1 150px;
+			flex: 1 1 220px;
 			background: white;
 			margin: 10px;
 			padding: 20px;

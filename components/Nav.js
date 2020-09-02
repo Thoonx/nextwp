@@ -17,6 +17,7 @@ const Nav = () => (
             top: 20px;
             right: 20px;
             box-shadow: 9px 15px 23px #3d40f252;
+            z-index: 2;
         }    
 
         ul li{
