@@ -22,3 +22,11 @@ img{
   height: 250px;
   object-fit: cover;
 }
+.acf{
+	  background: #3d40f2;
+    color: white;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 75px;
+    font-size: 12px;
+}

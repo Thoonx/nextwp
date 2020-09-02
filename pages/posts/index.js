@@ -3,21 +3,7 @@ import Card from '../../components/Card'
 import Container from '../../components/Container'
 import Flex from '../../components/Flex'
 
-export async function getStaticProps() {
-
-	const res = await fetch('https://antuncrnja.com/w/wp-json/wp/v2/posts')
-	const posts = await res.json()
-  
-	return {
-	  props: {
-		posts,
-	  },
-	  revalidate: 30
-	}
-  }
-
-  function Blog({ posts }) {
-	return (
+const Posts = ({ posts }) => (
 	
 	  <Container>
 		  <Flex>
@@ -33,9 +19,22 @@ export async function getStaticProps() {
 					))}
 
 		</Flex>
+		<button onClick={ () => router.push(`/posts?page=${page + 1}`)}>Next</button>
 	  </Container>
-	  
 	)
+
+
+  export async function getStaticProps() {
+
+	const res = await fetch('https://antuncrnja.com/w/wp-json/wp/v2/posts?per_page=3&page=1')
+	const posts = await res.json()
+  
+	return {
+	  props: {
+		posts
+	  },
+	  revalidate: 30
+	}
   }
 
-  export default Blog
+  export default Posts
