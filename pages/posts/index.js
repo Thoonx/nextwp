@@ -1,4 +1,7 @@
 import Link from 'next/link'
+import Card from '../../components/Card'
+import Container from '../../components/Container'
+import Flex from '../../components/Flex'
 
 export async function getStaticProps() {
 
@@ -9,24 +12,29 @@ export async function getStaticProps() {
 	  props: {
 		posts,
 	  },
-	  revalidate: 1
+	  revalidate: 30
 	}
   }
 
 
   function Blog({ posts }) {
 	return (
-	  <ul>
-		{posts.map((post) => (
-			<div key={post.id}>
-			<Link href={ `/posts/${ post.id }` }>
-				<a  href={ `/posts/${ post.id }` }>
-					<li>{post.title.rendered}</li>
-				</a>
-			</Link>
-			</div>
-		))}
-	  </ul>
+		
+	  <Container>
+		  <Flex>
+					{posts.map((post) => (
+						<Card key={post.id}>
+						<Link href={ `/posts/${ post.id }` }>
+							<a  href={ `/posts/${ post.id }` }>
+								<p>{post.title.rendered}</p>
+								<img src={post.better_featured_image.media_details.sizes.medium.source_url} />
+							</a>
+						</Link>
+						</Card>
+					))}
+
+		</Flex>
+	  </Container>
 	)
   }
 
