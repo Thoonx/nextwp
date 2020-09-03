@@ -38,7 +38,8 @@ const router = useRouter()
 
   export async function getServerSideProps({query: { page = 1 }}) {
 
-	const res = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts?per_page=${postsPerPage}&page=${page}&?_fields=id,title,content,acf,featured_media,better_featured_image`)
+	const res = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts?_fields=id,title,acf,content,date,featured_media,better_featured_image&per_page=${postsPerPage}&page=${page}`)
+	
 	const posts = await res.json()
   
 		const allPages = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts?_fields=id`)
