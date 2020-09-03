@@ -20,7 +20,7 @@ const Post = ({post}) => {
 
 			<div dangerouslySetInnerHTML={ {__html: post[0].content.rendered } } />
 			<p className="acf">ACF: {post[0].acf ? post[0].acf.neki : ''}</p>
-			
+			<button style={{background: '#ff4c4c'}} onClick={ () => router.back()}>BACK</button>
 		</Container>
 	)
   }
