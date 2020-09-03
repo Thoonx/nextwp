@@ -44,7 +44,8 @@ const Post = ({post}) => {
 	return { 
 		props: { 
 		post,
-	 }
+	 },
+	 revalidate: 1
 	}
   }
   
