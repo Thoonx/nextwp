@@ -40,7 +40,6 @@ const router = useRouter()
   export async function getServerSideProps({query: { page = 1 }}) {
 
 	const res = await fetch(`${apiUrl}posts?_fields=id,title,acf,content,date,featured_media,better_featured_image&per_page=${postsPerPage}&page=${page}`)
-	
 	const posts = await res.json()
   
 		const allPages = await fetch(`${apiUrl}posts?_fields=id`)
