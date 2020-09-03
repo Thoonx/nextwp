@@ -7,24 +7,22 @@ import { useState } from 'react'
 import Head from 'next/head'
 
 
-
-
 const Posts = ({ posts, allPosts, lastPost }) => {
 	let showMore = 2;
 	
 	const [load, setLoad] = useState(showMore)
 	
 	const loader = () => {
+		
 		const test = 1
-
+			console.log(posts[load].title.rendered)
 		lastPost = posts[load - test].title.rendered;
 		
 		const allA = document.querySelectorAll('.test')
 		allA.forEach( x => {
 			if(x.querySelector('p').innerText == lastPost){
-				x.setAttribute("id", "scroll");
-				console.log(load)
-				console.log(lastPost)
+				x.setAttribute('id', 'scroll');
+				
 			}else{
 				x.removeAttribute("id")
 			}
@@ -32,7 +30,7 @@ const Posts = ({ posts, allPosts, lastPost }) => {
 		})
 
 		setLoad(load + showMore)
-
+		
 	}
    
 	return(
@@ -43,9 +41,9 @@ const Posts = ({ posts, allPosts, lastPost }) => {
 			<Container>
 				<Flex>
 						{posts.slice(0,load).map((post) => (
-							<Card key={post.id} >
+							<Card key={post.id}  id={post.id}>
 							<Link href={ `/blog/${ post.slug }` }>
-								<a href={ `/blog/${ post.slug }`} className="test">
+								<a href={ `/blog/${ post.slug }`} className="test" id={post.id}>
 						<p>{post.title.rendered}</p>
 									<img src={
 										post.better_featured_image 
