@@ -1,0 +1,1 @@
+export const apiUrl = 'https://antuncrnja.com/w/wp-json/wp/v2/';

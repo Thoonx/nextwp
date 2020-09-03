@@ -3,10 +3,11 @@ import Head from 'next/head'
 import Card from '../components/Card'
 import ContainerFront from '../components/ContainerFront'
 import Flex from '../components/Flex'
+import { url } from '../pages/api/url'
 
 export async function getStaticProps() {
 
-	const res = await fetch('https://antuncrnja.com/w/wp-json/wp/v2/posts?per_page=4')
+	const res = await fetch(`${url}wp-json/wp/v2/posts?per_page=4`)
 	const posts = await res.json()
   
 	return {

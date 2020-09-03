@@ -3,6 +3,7 @@ import Card from '../../components/Card'
 import Container from '../../components/Container'
 import Flex from '../../components/Flex'
 import { useRouter } from 'next/router'
+import { apiUrl } from '../api/apiUrl'
 
 const postsPerPage = 2
 
@@ -38,11 +39,11 @@ const router = useRouter()
 
   export async function getServerSideProps({query: { page = 1 }}) {
 
-	const res = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts?_fields=id,title,acf,content,date,featured_media,better_featured_image&per_page=${postsPerPage}&page=${page}`)
+	const res = await fetch(`${apiUrl}posts?_fields=id,title,acf,content,date,featured_media,better_featured_image&per_page=${postsPerPage}&page=${page}`)
 	
 	const posts = await res.json()
   
-		const allPages = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts?_fields=id`)
+		const allPages = await fetch(`${apiUrl}posts?_fields=id`)
 		const resPages = await allPages.json();
 		const countPages = resPages.length / postsPerPage
 

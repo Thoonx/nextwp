@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Card from '../../components/Card'
 import Container from '../../components/Container'
 import Flex from '../../components/Flex'
+import { url } from '../api/url'
 
 
 const Posts = ({ posts }) => {
@@ -29,7 +30,7 @@ const Posts = ({ posts }) => {
 
   export async function getStaticProps() {
 
-	const res = await fetch('https://antuncrnja.com/w/wp-json/wp/v2/posts?_fields=id,slug,title,acf,content,date,featured_media,better_featured_image')
+	const res = await fetch(`${url}wp-json/wp/v2/posts?_fields=id,slug,title,acf,content,date,featured_media,better_featured_image`)
 	const posts = await res.json()
   
 	return {
