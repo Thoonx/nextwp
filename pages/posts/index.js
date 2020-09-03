@@ -20,7 +20,6 @@ const Posts = ({ posts }) => {
 					))}
 
 		</Flex>
-		<button onClick={ () => router.push(`/posts?page=${page + 1}`)}>Next</button>
 	  </Container>
 )
 }
@@ -28,7 +27,7 @@ const Posts = ({ posts }) => {
 
   export async function getStaticProps() {
 
-	const res = await fetch('https://antuncrnja.com/w/wp-json/wp/v2/posts?per_page=3&page=1')
+	const res = await fetch('https://antuncrnja.com/w/wp-json/wp/v2/posts?_fields=id,title,content,acf,featured_media,better_featured_image')
 	const posts = await res.json()
   
 	return {
@@ -40,3 +39,6 @@ const Posts = ({ posts }) => {
   }
 
   export default Posts
+
+
+  

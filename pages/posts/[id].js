@@ -13,7 +13,6 @@ const Post = ({post}) => {
 			<small style={{marginBottom:'25px',display:'block'}}>{post.date.replace('T', ' ')}</small>
 			<img src={`https://antuncrnja.com/w/wp-content/uploads/${post.better_featured_image.media_details.file}`} />
 			<div dangerouslySetInnerHTML={ {__html: post.content.rendered } } />
-	
 			<p className="acf">ACF: {post.acf ? post.acf.neki : ''}</p>
 			
 		</Container>
@@ -21,7 +20,7 @@ const Post = ({post}) => {
   }
   
   export async function getStaticPaths() {
-	const res = await fetch('https://antuncrnja.com/w/wp-json/wp/v2/posts')
+	const res = await fetch('https://antuncrnja.com/w/wp-json/wp/v2/posts?_fields=id')
 	const posts = await res.json()
 
 	const paths = posts.map((post) => ({
@@ -33,7 +32,7 @@ const Post = ({post}) => {
   
   export async function getStaticProps({ params }) {
 
-	const res = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts/${params.id}`)
+	const res = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts/${params.id}?_fields=id,title,content,acf,featured_media,better_featured_image,date`)
 	const post = await res.json()
 
 	return { 
