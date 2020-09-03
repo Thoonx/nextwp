@@ -11,7 +11,12 @@ const Post = ({post}) => {
 		<Container>
 			<h1>{post.title.rendered}</h1>
 			<small style={{marginBottom:'25px',display:'block'}}>{post.date.replace('T', ' ')}</small>
-			<img src={`https://antuncrnja.com/w/wp-content/uploads/${post.better_featured_image.media_details.file}`} />
+			
+			<img src={
+				post.better_featured_image 
+				? `https://antuncrnja.com/w/wp-content/uploads/${post.better_featured_image.media_details.file}` 
+				: 'https://www.ilac.com/wp-content/uploads/2019/06/placeholder-600x400.png'} />
+
 			<div dangerouslySetInnerHTML={ {__html: post.content.rendered } } />
 			<p className="acf">ACF: {post.acf ? post.acf.neki : ''}</p>
 			

@@ -13,7 +13,10 @@ const Posts = ({ posts }) => {
 						<Link href={ `/posts/${ post.id }` }>
 							<a  href={ `/posts/${ post.id }` }>
 								<p>{post.title.rendered}</p>
-								<img src={post.better_featured_image.media_details.sizes.medium.source_url} />
+								<img src={
+									post.better_featured_image 
+									? post.better_featured_image.media_details.sizes.medium.source_url 
+									: 'https://www.ilac.com/wp-content/uploads/2019/06/placeholder-600x400.png'} />
 							</a>
 						</Link>
 						</Card>
@@ -23,7 +26,6 @@ const Posts = ({ posts }) => {
 	  </Container>
 )
 }
-
 
   export async function getStaticProps() {
 
