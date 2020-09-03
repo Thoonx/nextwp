@@ -7,18 +7,39 @@ import { useState } from 'react'
 
 
 
-const Posts = ({ posts, allPosts }) => {
-	const showMore = 2;
+const Posts = ({ posts, allPosts, lastPost }) => {
+	let showMore = 2;
 	const [load, setLoad] = useState(showMore)
+
+	
+	const loader = () => {
+		const test = 1
+		lastPost = posts[load - test].title.rendered;
+
+		const allA = document.querySelectorAll('.test')
+		allA.forEach( x => {
+			if(x.querySelector('p').innerText == lastPost){
+				x.setAttribute("id", "zadnji");
+				console.log(load)
+				console.log(lastPost)
+			}else{
+				x.removeAttribute("id")
+			}
+			
+		})
+
+		setLoad(load + showMore)
+
+	}
    
 	return(
 	  <Container>
 		  <Flex>
 				{posts.slice(0,load).map((post) => (
-					<Card key={post.id}>
+					<Card key={post.id} >
 					<Link href={ `/blog/${ post.slug }` }>
-						<a  href={ `/blog/${ post.slug }` }>
-							<p>{post.title.rendered}</p>
+						<a href={ `/blog/${ post.slug }`} className="test">
+				<p>{post.title.rendered}</p>
 							<img src={
 								post.better_featured_image 
 								? post.better_featured_image.media_details.sizes.medium.source_url 
@@ -30,8 +51,7 @@ const Posts = ({ posts, allPosts }) => {
              
 			 
 		</Flex>
-		<button onClick={() => setLoad(load + showMore)} className={load >= allPosts ? 'erase' : 'active'}>LOAD MORE</button>
-		{console.log(allPosts)}
+		<a href="#zadnji"><button onClick={() => setLoad(loader)} className={load >= allPosts ? 'erase' : 'active'}>LOAD MORE</button></a>
 	  </Container>
 )
 }
