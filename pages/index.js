@@ -32,7 +32,8 @@ export async function getStaticProps() {
 								<img src={
 									post.better_featured_image 
 									? post.better_featured_image.media_details.sizes.medium.source_url 
-									: 'https://www.ilac.com/wp-content/uploads/2019/06/placeholder-600x400.png'} />
+									: 'https://www.ilac.com/wp-content/uploads/2019/06/placeholder-600x400.png'} 
+								/>
 							</a>
 						</Link>
 						</Card>
