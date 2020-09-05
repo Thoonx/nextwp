@@ -5,8 +5,19 @@ import ContainerFront from '../../components/ContainerFront'
 import Flex from '../../components/Flex'
 
 
+export async function getServerSideProps() {
 
- const Blog = ({posts}) => {
+	const res = await fetch(`https://native.tportal.hr/planet-b/wp-json/wp/v2/posts?_fields=id,slug,title,content,date,featured_media,better_featured_image.media_details.sizes&per_page=4`)
+	const posts = await res.json()
+  
+	return {
+	  props: {
+		posts,
+	  }
+	  }
+  }
+
+  function Blog({ posts }) {
 	return (
 		
 	  <ContainerFront>
@@ -32,18 +43,6 @@ import Flex from '../../components/Flex'
     </div>
 	  </ContainerFront>
 	)
-  }
-
-  Blog.getServerSideProps = async () => {
-
-	const res = await fetch(`https://native.tportal.hr/planet-b/wp-json/wp/v2/posts?_fields=id,slug,title,content,date,featured_media,better_featured_image.media_details.sizes&per_page=4`)
-	const posts = await res.json()
-  
-	return {
-	  props: {
-		posts,
-	  }
-	  }
   }
 
   export default Blog
