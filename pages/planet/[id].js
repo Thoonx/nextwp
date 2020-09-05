@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import Container from '../../components/Container'
-import { url } from '../api/url'
+
 
 const Post = ({post}) => {
 
@@ -15,7 +15,7 @@ const Post = ({post}) => {
 			
 			<img src={
 				post.better_featured_image 
-				? `${url}wp-content/uploads/${post.better_featured_image.media_details.file}` 
+				? `https://native.tportal.hr/planet-b/wp-content/uploads/${post.better_featured_image.media_details.file}` 
 				: 'https://www.ilac.com/wp-content/uploads/2019/06/placeholder-600x400.png'} />
 
 			<div dangerouslySetInnerHTML={ {__html: post.content.rendered } } />
@@ -26,7 +26,7 @@ const Post = ({post}) => {
   }
   
   export async function getStaticPaths() {
-	const res = await fetch(`${url}wp-json/wp/v2/posts?_fields=id`)
+	const res = await fetch(`https://native.tportal.hr/planet-b/wp-json/wp/v2/posts?_fields=id`)
 	const posts = await res.json()
 
 	const paths = posts.map((post) => ({
