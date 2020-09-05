@@ -10,7 +10,6 @@
     git checkout dev
     git pull 
 */
-
 import '../styles/globals.css'
 import Nav from '../components/Nav'
 import Head from 'next/head'
