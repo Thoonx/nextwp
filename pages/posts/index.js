@@ -22,7 +22,6 @@ const Posts = ({ posts, allPosts, lastPost }) => {
 		allA.forEach( x => {
 			if(x.querySelector('p').innerText == lastPost){
 				x.setAttribute('id', 'scroll');
-				
 			}else{
 				x.removeAttribute("id")
 			}

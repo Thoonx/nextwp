@@ -1,20 +1,19 @@
 import Link from 'next/link'
 import Head from 'next/head'
-import Card from '../components/Card'
-import ContainerFront from '../components/ContainerFront'
-import Flex from '../components/Flex'
-import { url } from '../pages/api/url'
+import Card from '../../components/Card'
+import ContainerFront from '../../components/ContainerFront'
+import Flex from '../../components/Flex'
 
-export async function getStaticProps() {
 
-	const res = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts?_fields=id,slug,title,acf,content,date,featured_media,better_featured_image.media_details.sizes&per_page=4`)
+export async function getServerSideProps() {
+
+	const res = await fetch(`https://native.tportal.hr/planet-b/wp-json/wp/v2/posts?_fields=id,slug,title,content,date,featured_media,better_featured_image.media_details.sizes&per_page=4`)
 	const posts = await res.json()
   
 	return {
 	  props: {
 		posts,
-	  },
-	  revalidate: 30
+	  }
 	  }
   }
 
@@ -27,8 +26,8 @@ export async function getStaticProps() {
 		  <Flex>
 					{posts.map((post) => (
 						<Card key={post.id}>
-						<Link href={ `/posts/${ post.id }` }>
-							<a  href={ `/posts/${ post.id }` }>
+						<Link href={ `/planet/${ post.id }` }>
+							<a  href={ `/planet/${ post.id }` }>
 								<p>{post.title.rendered}</p>
 								<img src={
 									post.better_featured_image 

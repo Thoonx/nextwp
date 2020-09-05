@@ -38,6 +38,8 @@ const Posts = ({ posts, allPosts }) => {
 
   export async function getStaticProps() {
 
+	
+
 	const res = await fetch(`${url}wp-json/wp/v2/posts?_fields=id,slug,title,acf,content,date,featured_media,better_featured_image`)
 	const posts = await res.json()
 
