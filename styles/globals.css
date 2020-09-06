@@ -42,6 +42,11 @@ button{
   box-shadow: rgb(178 177 194 / 44%) 0px 4px 9px 0;
   cursor: pointer;
 }
+button:disabled {
+  background: #f9f9f9;
+  box-shadow: 0 0 black;
+  color: #c3c3c3;
+}
 
 .active{
   display: block
