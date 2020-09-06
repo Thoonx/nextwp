@@ -38,12 +38,14 @@ const router = useRouter()
 
   export async function getServerSideProps({query: { page = 1 }}) {
 
-	const res = await fetch(`https://native.tportal.hr/planet-b/wp-json/wp/v2/posts?per_page=${postsPerPage}&page=${page}&?_fields=id,title,content,featured_media,better_featured_image`)
-	const posts = await res.json()
-  
-		const allPages = await fetch(`https://native.tportal.hr/planet-b/wp-json/wp/v2/posts?_fields=id`)
+	const allPages = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts?_fields=id`)
 		const resPages = await allPages.json();
 		const countPages = resPages.length / postsPerPage
+
+	const res = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts?per_page=${postsPerPage}&page=${page}&?_fields=id,title,content,featured_media,better_featured_image`)
+	const posts = await res.json()
+  
+		
 
 	return {
 	  props: {

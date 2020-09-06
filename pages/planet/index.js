@@ -7,7 +7,7 @@ import Flex from '../../components/Flex'
 
 export async function getServerSideProps() {
 
-	const res = await fetch(`../api/json.json`)
+	const res = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts?_fields=id,slug,title,content,date,featured_media,better_featured_image.media_details.sizes&per_page=4`)
 	const posts = await res.json()
   
 	return {
