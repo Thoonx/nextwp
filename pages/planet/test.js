@@ -29,7 +29,7 @@ const router = useRouter()
 					))}
 		</Flex>
 		<button onClick={ () => router.push(`/planet/test?page=${page - 1}`)} disabled={page<=1}>Prev</button>
-		<button onClick={ () => router.push(`/planet/test?page=2`)} disabled={page>=countPages}>Next</button>
+		<button onClick={ () => router.push(`/planet/test?page=${page + 1}`)} disabled={page>=countPages}>Next</button>
 		<button onClick={ () => router.push(`/posts/`)}>Posts</button>
 		<small>page: {page}</small>
 		
