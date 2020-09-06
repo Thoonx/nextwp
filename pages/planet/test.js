@@ -7,7 +7,7 @@ import { url } from '../api/url'
 
 const postsPerPage = 2
 
-const Posts = ({ posts, page, countPages }) => {
+const Planet = ({ posts, page, countPages }) => {
 const router = useRouter()
 	return(
 	  <Container>
@@ -30,10 +30,11 @@ const router = useRouter()
 		</Flex>
 		<button onClick={ () => router.push(`/planet/test?page=${page - 1}`)} disabled={page<=1}>Prev</button>
 		<button onClick={ () => router.push(`/planet/test?page=${page + 1}`)} disabled={page>=countPages}>Next</button>
+		<button onClick={ () => router.push(`/posts/`)}>Posts</button>
 		<small>page: {page}</small>
 		
 	  </Container>
-)
+	)
 }
 
   export async function getServerSideProps({query: { page = 1 }}) {
@@ -42,11 +43,9 @@ const router = useRouter()
 		const resPages = await allPages.json();
 		const countPages = resPages.length / postsPerPage
 
-	const res = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts?per_page=${postsPerPage}&page=${page}&?_fields=id,title,content,featured_media,better_featured_image`)
+	const res = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts?_fields=id,slug,title,content,date,featured_media,better_featured_image.media_details.sizes&per_page=${postsPerPage}&page=${page}`)
 	const posts = await res.json()
   
-		
-
 	return {
 	  props: {
 		posts,
@@ -56,4 +55,4 @@ const router = useRouter()
 	}
   }
 
-  export default Posts
+  export default Planet
