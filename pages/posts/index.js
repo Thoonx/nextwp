@@ -45,7 +45,7 @@ const Posts = ({ posts, allPosts, lastPost }) => {
 							<Link href={ `/blog/${ post.slug }` }>
 								<a href={ `/blog/${ post.slug }`} className="test" id={post.id}>
 						<p>{post.title.rendered}</p>
-									<Image src={
+									<img src={
 										post.better_featured_image 
 										? post.better_featured_image.media_details.sizes.medium.source_url 
 										: 'https://www.ilac.com/wp-content/uploads/2019/06/placeholder-600x400.png'} />
