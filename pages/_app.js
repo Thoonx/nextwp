@@ -1,8 +1,12 @@
 /*GIT
     git init
+
+    git config --global user.name 'Thoonx'
+    git config --global user.email 'ggold.zg@gmail.com'
+
     sudo git remote add origin https://github.com/Thoonx/test1.git
 
-        git add .
+        sudo git add .
         git commit -m 'update'
         git push -u origin master -f
 
