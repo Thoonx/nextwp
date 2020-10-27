@@ -23,7 +23,7 @@ export async function getStaticProps() {
 		
 	  <ContainerFront>
       <div>
-      
+      <h1>HELLO UPDATE</h1>
 		  <Flex>
 					{posts.map((post) => (
 						<Card key={post.id}>
