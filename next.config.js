@@ -1,3 +1,8 @@
 module.exports = {
-	trailingSlash: true
+	trailingSlash: true,
+	images: {
+		domains: ['antuncrnja.com'],
+	  },
   }
+
+  

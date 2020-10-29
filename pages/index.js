@@ -4,6 +4,7 @@ import Card from '../components/Card'
 import ContainerFront from '../components/ContainerFront'
 import Flex from '../components/Flex'
 import { url } from '../pages/api/url'
+import Image from 'next/image'
 
 export async function getStaticProps() {
 
@@ -22,6 +23,7 @@ export async function getStaticProps() {
 	return (
 		
 	  <ContainerFront>
+		 
       <div>
 		  <Flex>
 					{posts.map((post) => (
@@ -29,11 +31,11 @@ export async function getStaticProps() {
 						<Link href={ `/posts/${ post.id }` }>
 							<a  href={ `/posts/${ post.id }` }>
 								<p>{post.title.rendered}</p>
-								<img src={
+								<Image src={
 									post.better_featured_image 
 									? post.better_featured_image.media_details.sizes.medium.source_url 
 									: 'https://www.ilac.com/wp-content/uploads/2019/06/placeholder-600x400.png'} 
-								/>
+								width="220" height="220" quality={60} loading="lazy"/>
 							</a>
 						</Link>
 						</Card>
