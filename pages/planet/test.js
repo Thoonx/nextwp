@@ -11,7 +11,6 @@ const Planet = ({ posts, page, countPages }) => {
 const router = useRouter()
 	return(
 	  <Container>
-		  
 		  <Flex>
 					{posts.map((post) => (
 						<Card key={post.id}>
@@ -28,10 +27,10 @@ const router = useRouter()
 						</Card>
 					))}
 		</Flex>
-		<button onClick={ () => router.push(`/planet/test?page=${page - 1}`)} disabled={page<=1}>Prev</button>
-		<button onClick={ () => router.push(`/planet/test?page=${page + 1}`)} disabled={page>=countPages}>Next</button>
-		<button onClick={ () => router.push(`/posts/`)}>Posts</button>
-		<small>page: {page}</small>
+			<button onClick={ () => router.push(`/planet/test?page=${page - 1}`)} disabled={page<=1}>Prev</button>
+			<button onClick={ () => router.push(`/planet/test?page=${page + 1}`)} disabled={page>=countPages}>Next</button>
+			<button onClick={ () => router.push(`/posts/`)}>Posts</button>
+			<small>page: {page}</small>
 		
 	  </Container>
 	)

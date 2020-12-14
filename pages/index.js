@@ -8,7 +8,7 @@ import Image from 'next/image'
 
 export async function getStaticProps() {
 
-	const res = await fetch(`https://antuncrnja.com/w/wp-json/wp/v2/posts?_fields=id,slug,title,acf,content,date,featured_media,better_featured_image.media_details.sizes&per_page=4`)
+	const res = await fetch(`${process.env.URL}/posts?_fields=id,slug,title,acf,content,date,featured_media,better_featured_image.media_details.sizes&per_page=4`)
 	const posts = await res.json()
   
 	return {
@@ -35,7 +35,7 @@ export async function getStaticProps() {
 									post.better_featured_image 
 									? post.better_featured_image.media_details.sizes.medium.source_url 
 									: 'https://www.ilac.com/wp-content/uploads/2019/06/placeholder-600x400.png'} 
-								width="220" height="220" quality={60} loading="lazy"/>
+								 quality={60} loading="lazy" unsized/>
 							</a>
 						</Link>
 						</Card>

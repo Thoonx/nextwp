@@ -6,31 +6,29 @@ import { url } from '../api/url'
 import { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
-
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 const Posts = ({ posts, allPosts, lastPost }) => {
+	const router = useRouter();
 	let showMore = 2;
-	
-	const [load, setLoad] = useState(showMore)
-	
+	let [load, setLoad] = useState(2);
+
+	useEffect( ()=>{
+		if(router.query.posts){
+			setLoad(+router.query.posts)
+		}
+	},[router]) 
+
 	const loader = () => {
 		
 		const test = 1
-			console.log(posts[load].title.rendered)
-		lastPost = posts[load - test].title.rendered;
+		let lastPost = posts[load - test].title.rendered;
 		
-		const allA = document.querySelectorAll('.test')
-		allA.forEach( x => {
-			if(x.querySelector('p').innerText == lastPost){
-				x.setAttribute('id', 'scroll');
-			}else{
-				x.removeAttribute("id")
-			}
-			
-		})
+		
 
 		setLoad(load + showMore)
-		
+		router.push(`?posts=${load + showMore}`)
 	}
    
 	return(
@@ -56,7 +54,7 @@ const Posts = ({ posts, allPosts, lastPost }) => {
 					
 					
 				</Flex>
-				<a href="#scroll"><button onClick={() => setLoad(loader)} className={load >= allPosts ? 'erase' : 'active'}>LOAD MORE</button></a>
+				<a href="#scroll"><button onClick={loader} className={load >= allPosts ? 'erase' : 'active'} id="scroll">LOAD MORE</button></a>
 			</Container>
 			<style global jsx>
    {`
