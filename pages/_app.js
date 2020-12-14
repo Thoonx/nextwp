@@ -7,8 +7,8 @@
     sudo git remote add origin https://github.com/Thoonx/test1.git
 
         sudo git add .
-        git commit -m 'update'
-        git push -u origin master -f
+        sudo git commit -m 'update'
+        sudo git push -u origin master -f
 
     git push -u origin master
     git checkout dev

@@ -9,10 +9,12 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-const Posts = ({ posts, allPosts, lastPost }) => {
+const Posts = ({ posts, allPosts}) => {
 	const router = useRouter();
-	let showMore = 2;
-	let [load, setLoad] = useState(2);
+
+	let postsToLoad = 2
+	let PostsPerPage = 2
+	let [load, setLoad] = useState(PostsPerPage);
 
 	useEffect( ()=>{
 		if(router.query.posts){
@@ -20,15 +22,23 @@ const Posts = ({ posts, allPosts, lastPost }) => {
 		}
 	},[router]) 
 
-	const loader = () => {
-		
-		const test = 1
-		let lastPost = posts[load - test].title.rendered;
-		
-		
+	const loadMorePosts = () => {
 
-		setLoad(load + showMore)
-		router.push(`?posts=${load + showMore}`)
+
+		let lastPost = posts[load - postsToLoad + 1].title.rendered;
+		
+		const allA = document.querySelectorAll('.test')
+		allA.forEach( x => {
+			if(x.querySelector('p').innerText == lastPost){
+				x.setAttribute('id', 'scroll');
+			}else{
+				x.removeAttribute("id")
+			}
+			
+		})
+
+		setLoad(load + postsToLoad)
+		router.push(`?posts=${load + postsToLoad}`)
 	}
    
 	return(
@@ -42,11 +52,12 @@ const Posts = ({ posts, allPosts, lastPost }) => {
 							<Card key={post.id}  id={post.id}>
 							<Link href={ `/blog/${ post.slug }` }>
 								<a href={ `/blog/${ post.slug }`} className="test" id={post.id}>
-						<p>{post.title.rendered}</p>
+						
 									<img src={
 										post.better_featured_image 
 										? post.better_featured_image.media_details.sizes.medium.source_url 
 										: 'https://www.ilac.com/wp-content/uploads/2019/06/placeholder-600x400.png'} />
+										<p>{post.title.rendered}</p>
 								</a>
 							</Link>
 							</Card>
@@ -54,7 +65,7 @@ const Posts = ({ posts, allPosts, lastPost }) => {
 					
 					
 				</Flex>
-				<a href="#scroll"><button onClick={loader} className={load >= allPosts ? 'erase' : 'active'} id="scroll">LOAD MORE</button></a>
+				<a href="#scroll"><button onClick={loadMorePosts} className={load >= allPosts ? 'erase' : 'active'} >LOAD MORE</button></a>
 			</Container>
 			<style global jsx>
    {`
