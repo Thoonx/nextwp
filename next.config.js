@@ -3,6 +3,8 @@ module.exports = {
 	images: {
 		domains: ['antuncrnja.com'],
 	  },
+	  compress: true,
+	  //basePath: '/'
   }
 
   

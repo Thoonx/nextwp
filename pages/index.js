@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Card from './../components/Card'
 import Container from './../components/Container'
 import Flex from './../components/Flex'
-import { url } from './api/url'
 import { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -23,8 +22,6 @@ const Posts = ({ posts, allPosts}) => {
 	},[router]) 
 
 	const loadMorePosts = () => {
-
-
 		let lastPost = posts[load - postsToLoad + 1].title.rendered;
 		
 		const allA = document.querySelectorAll('.test')
@@ -34,7 +31,6 @@ const Posts = ({ posts, allPosts}) => {
 			}else{
 				x.removeAttribute("id")
 			}
-			
 		})
 
 		setLoad(load + postsToLoad)
@@ -52,18 +48,12 @@ const Posts = ({ posts, allPosts}) => {
 							<Card key={post.id}  id={post.id}>
 							<Link href={ `/blog/${ post.slug }` }>
 								<a href={ `/blog/${ post.slug }`} className="test" id={post.id}>
-						
-									<img src={
-										post.better_featured_image 
-										? post.better_featured_image.media_details.sizes.medium.source_url 
-										: 'https://www.ilac.com/wp-content/uploads/2019/06/placeholder-600x400.png'} />
-										<p>{post.title.rendered}</p>
+								<Image src={post.featured_image.next_post_size} unsized/>
+										<p>{post.title}</p>
 								</a>
 							</Link>
 							</Card>
 						))}
-					
-					
 				</Flex>
 				<a href="#scroll"><button onClick={loadMorePosts} className={load >= allPosts ? 'erase' : 'active'} >LOAD MORE</button></a>
 			</Container>
@@ -80,7 +70,7 @@ const Posts = ({ posts, allPosts}) => {
 
   export async function getStaticProps() {
 
-	const res = await fetch(`${url}wp-json/wp/v2/posts?_fields=id,slug,title,acf,content,date,featured_media,better_featured_image`)
+	const res = await fetch(process.env.API)
 	const posts = await res.json()
 
 	const allPosts = posts.length;

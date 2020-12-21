@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import Container from '../../components/Container'
-import { url } from '../api/url'
+import Image from 'next/image'
 
 const Post = ({post}) => {
 
@@ -10,23 +10,20 @@ const Post = ({post}) => {
   
 	return (
 		<Container>
-			<h1>{post[0].title.rendered}</h1>
-			<small style={{marginBottom:'25px',display:'block'}}>{post[0].date.replace('T', ' ')}</small>
+			<h1>{post.title}</h1>
+			<small style={{marginBottom:'25px',display:'block'}}>{post.date.replace('T', ' ')}</small>
 			
-			<img src={
-				post[0].better_featured_image 
-				? `${url}wp-content/uploads/${post[0].better_featured_image.media_details.file}` 
-				: 'https://www.ilac.com/wp-content/uploads/2019/06/placeholder-600x400.png'} />
+			<Image src={post.featured_image.large} unsized/>
 
-			<div dangerouslySetInnerHTML={ {__html: post[0].content.rendered } } />
-			<p className="acf">ACF: {post[0].acf ? post[0].acf.neki : ''}</p>
+			<div dangerouslySetInnerHTML={ {__html: post.content } } />
+			<p className="acf">ACF: {post.acf ? post.acf : ''}</p>
 			<button style={{background: '#ff4c4c'}} onClick={ () => router.back()}>BACK</button>
 		</Container>
 	)
   }
   
   export async function getStaticPaths() {
-	const res = await fetch(`${url}wp-json/wp/v2/posts?_fields=slug,id`)
+	const res = await fetch(`https://antuncrnja.com/w/wp-json/ac/v1/posts/`)
 	const posts = await res.json()
 
 	const paths = posts.map((post) => ({
@@ -38,7 +35,7 @@ const Post = ({post}) => {
   
   export async function getStaticProps({ params }) {
 
-	const res = await fetch(`${url}wp-json/wp/v2/posts?slug=${params.slug}&?_fields=id,title,slug,content,acf,featured_media,better_featured_image,date`)
+	const res = await fetch(`https://antuncrnja.com/w/wp-json/ac/v1/posts/${params.slug}`)
 	const post = await res.json()
 
 	return { 
