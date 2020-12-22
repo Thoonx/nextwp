@@ -11,7 +11,7 @@ const Post = ({post}) => {
 		<Container>
 			<h1>{post.title}</h1>
 			<small style={{marginBottom:'25px',display:'block'}}>{post.date.replace('T', ' ')}</small>
-			<img src={post.featured_image.new_image_size} /> 
+			<img src={post.featured_image.large} /> 
 			<div dangerouslySetInnerHTML={ {__html: post.content } } />
 			<p className="acf">ACF: {post.acf ? post.acf : ''}</p>
 			<button style={{background: '#ff4c4c'}} onClick={ () => router.back()}>BACK</button>
