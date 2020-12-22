@@ -14,7 +14,7 @@ const Posts = ({ posts, allPosts}) => {
 
 	let postsToLoad = 2
 	let PostsPerPage = 2
-	let [load, setLoad] = useState(PostsPerPage);
+	const [load, setLoad] = useState(PostsPerPage);
 
 	useEffect( ()=>{
 		if(router.query.posts){
@@ -47,15 +47,17 @@ const Posts = ({ posts, allPosts}) => {
 				<Flex>
 						{posts.slice(0,load).map( post => (
 							<Card key={post.id}  id={post.id}>
-							<Link href={ `/blog/${ post.slug }` }>
-								<a href={ `/blog/${ post.slug }`} className="test" id={post.id}>
+								<Link href={ `/blog/${ post.slug }` }>
+									<a href={ `/blog/${ post.slug }`} className="test" id={post.id}>
 
-									<img src={post.featured_image.new_image_size} />
-									
+										<img src={post.featured_image.next_thumbnail}  onLoad={ e =>{
+											 e.target.style='';
+											 e.target.src=post.featured_image.large;  
+											}} style={{filter: 'blur(10px)'}}/>
 
-								<p>{post.title}</p>
-								</a>
-							</Link>
+									<p>{post.title}</p>
+									</a>
+								</Link>
 							</Card>
 						))}
 				</Flex>
