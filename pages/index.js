@@ -50,7 +50,7 @@ const Posts = ({ posts, allPosts}) => {
 							<Link href={ `/blog/${ post.slug }` }>
 								<a href={ `/blog/${ post.slug }`} className="test" id={post.id}>
 
-									<img src={'/loading.gif'} onLoad={ (e) => e.target.src = post.featured_image.new_image_size }/>
+									<img src={post.featured_image.new_image_size} />
 									
 
 								<p>{post.title}</p>
