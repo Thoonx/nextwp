@@ -12,9 +12,7 @@ const Post = ({post}) => {
 		<Container>
 			<h1>{post.title}</h1>
 			<small style={{marginBottom:'25px',display:'block'}}>{post.date.replace('T', ' ')}</small>
-			
-			<Image src={post.featured_image.large} unsized/>
-
+			<img src={'/test.jpg'} onLoad={ (e) => e.target.src = post.featured_image.large }/> 
 			<div dangerouslySetInnerHTML={ {__html: post.content } } />
 			<p className="acf">ACF: {post.acf ? post.acf : ''}</p>
 			<button style={{background: '#ff4c4c'}} onClick={ () => router.back()}>BACK</button>
@@ -24,7 +22,7 @@ const Post = ({post}) => {
   
   export async function getStaticPaths() {
 	const res = await fetch(`https://antuncrnja.com/w/wp-json/ac/v1/posts/`)
-	const posts = await res.json()
+	const posts = await res.json();
 
 	const paths = posts.map((post) => ({
 	  params: { slug: post.slug },

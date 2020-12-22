@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
+
 const Posts = ({ posts, allPosts}) => {
 	const router = useRouter();
 
@@ -44,12 +45,15 @@ const Posts = ({ posts, allPosts}) => {
 		</Head>
 			<Container>
 				<Flex>
-						{posts.slice(0,load).map((post) => (
+						{posts.slice(0,load).map( post => (
 							<Card key={post.id}  id={post.id}>
 							<Link href={ `/blog/${ post.slug }` }>
 								<a href={ `/blog/${ post.slug }`} className="test" id={post.id}>
-								<Image src={post.featured_image.next_post_size} unsized/>
-										<p>{post.title}</p>
+
+									<img src={'/loading.gif'} onLoad={ (e) => e.target.src = post.featured_image.new_image_size }/>
+									
+
+								<p>{post.title}</p>
 								</a>
 							</Link>
 							</Card>
