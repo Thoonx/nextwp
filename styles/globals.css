@@ -23,6 +23,8 @@ img{
   height: 250px;
   object-fit: cover;
   object-position: center;
+  background: whitesmoke;
+  transition: all .3s ease;
 }
 .acf{
 	  background: #3d40f2;

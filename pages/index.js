@@ -8,7 +8,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-
 const Posts = ({ posts, allPosts}) => {
 	const router = useRouter();
 
@@ -23,7 +22,7 @@ const Posts = ({ posts, allPosts}) => {
 	},[router]) 
 
 	const loadMorePosts = () => {
-		let lastPost = posts[load - postsToLoad + 1].title.rendered;
+		let lastPost = posts[load - postsToLoad + 1].title;
 		
 		const allA = document.querySelectorAll('.test')
 		allA.forEach( x => {
@@ -37,7 +36,9 @@ const Posts = ({ posts, allPosts}) => {
 		setLoad(load + postsToLoad)
 		router.push(`?posts=${load + postsToLoad}`)
 	}
-   
+	
+
+	
 	return(
 		<>
 		<Head>
@@ -49,13 +50,8 @@ const Posts = ({ posts, allPosts}) => {
 							<Card key={post.id}  id={post.id}>
 								<Link href={ `/blog/${ post.slug }` }>
 									<a href={ `/blog/${ post.slug }`} className="test" id={post.id}>
-
-										<img src={post.featured_image.next_thumbnail}  onLoad={ e =>{
-											 e.target.style='';
-											 e.target.src=post.featured_image.large;  
-											}} style={{filter: 'blur(10px)'}}/>
-
-									<p>{post.title}</p>
+										<Image src={post.featured_image.next_post_size} unsized/>
+									    <p>{post.title}</p>
 									</a>
 								</Link>
 							</Card>
