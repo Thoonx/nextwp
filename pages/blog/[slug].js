@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import Container from '../../components/Container'
 import Image from 'next/image'
+import Head from 'next/head'
 
 const Post = ({post}) => {
 
@@ -9,6 +10,9 @@ const Post = ({post}) => {
   
 	return (
 		<Container>
+			<Head>
+				<title>{post.title}</title>
+			</Head>
 			<h1>{post.title}</h1>
 			<small style={{marginBottom:'25px',display:'block'}}>{post.date.replace('T', ' ')}</small>
 			<div className="bg">

@@ -29,7 +29,7 @@ img{
   background: url('/loading.gif');
   background-size: cover;
   background-position: center center;
-  
+  min-height: 300px;
 }
 .acf{
 	  background: #3d40f2;
@@ -67,3 +67,18 @@ button:disabled {
   margin: 0;
 }
 
+input {
+  height: 45px;
+  width: 310px;
+  border-radius: 36px;
+  border: 1px solid rgb(235, 235, 235);
+  background: #f9f9fa;
+  outline: none;
+  padding: 15px;
+  margin: 30px auto;
+  display: block;
+}
+::placeholder { 
+  color: rgb(128, 128, 128);
+  opacity: 1; 
+}

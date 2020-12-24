@@ -7,7 +7,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { urlObjectKeys } from 'next/dist/next-server/lib/utils'
 
 const Posts = ({ posts, allPosts}) => {
 	const router = useRouter();
@@ -15,6 +14,7 @@ const Posts = ({ posts, allPosts}) => {
 	let postsToLoad = 2
 	let PostsPerPage = 2
 	const [load, setLoad] = useState(PostsPerPage);
+	const [myPosts, setMyPosts] = useState(posts);
 
 	useEffect( ()=>{
 		if(router.query.posts){
@@ -37,8 +37,10 @@ const Posts = ({ posts, allPosts}) => {
 		setLoad(load + postsToLoad)
 		router.push(`?posts=${load + postsToLoad}`)
 	}
-	
 
+		function filterPosts(e){
+			setMyPosts( posts.filter( post => post.title.toUpperCase().includes(e.target.value.toUpperCase())) )
+		}
 	
 	return(
 		<>
@@ -46,14 +48,18 @@ const Posts = ({ posts, allPosts}) => {
 			<title>Posts</title>
 		</Head>
 			<Container>
+			
+				<input type="search" onChange={filterPosts} placeholder="Search Posts"/>
+				
+				
 				<Flex>
-						{posts.slice(0,load).map( post => (
+						{myPosts.slice(0,load).map( post => (
 							<Card key={post.id}  id={post.id}>
 								<Link href={ `/blog/${ post.slug }` }>
 									<a className="test" id={post.id}>
 										<div className="bg">
-									<Image src={post.featured_image.large} alt={post.title} unsized/>
-									    <p>{post.title}</p>
+									      <Image src={post.featured_image.next_post_size} alt={post.title} unsized/>
+									      <p>{post.title}</p>
 										</div>
 									</a>
 								</Link>
