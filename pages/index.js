@@ -7,6 +7,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import Checkbox from './../components/Checkbox'
 
 const Posts = ({ posts, allPosts}) => {
 	const router = useRouter();
@@ -49,6 +50,13 @@ const Posts = ({ posts, allPosts}) => {
 		</Head>
 			<Container>
 			
+			<select onChange={filterPosts}>
+			<option value="">--</option>
+				<option value="new">New</option>
+				<option value="post">Post</option>
+				<option value="17">17</option>
+			</select>
+
 				<input type="search" onChange={filterPosts} placeholder="Search Posts"/>
 				
 				
@@ -66,7 +74,7 @@ const Posts = ({ posts, allPosts}) => {
 							</Card>
 						))}
 				</Flex>
-				<a href="#scroll"><button onClick={loadMorePosts} className={load >= allPosts ? 'erase' : 'active'} >LOAD MORE</button></a>
+				<a href="#scroll"><button onClick={loadMorePosts} className={load >= myPosts ? 'erase' : 'active'} >LOAD MORE</button></a>
 			</Container>
 			<style global jsx>
    {`

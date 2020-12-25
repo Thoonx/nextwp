@@ -67,7 +67,7 @@ button:disabled {
   margin: 0;
 }
 
-input {
+input[type="search"] {
   height: 45px;
   width: 310px;
   border-radius: 36px;
@@ -81,4 +81,20 @@ input {
 ::placeholder { 
   color: rgb(128, 128, 128);
   opacity: 1; 
+}
+select{
+height: 45px;
+    width: 310px;
+    border-radius: 40px;
+    display: block;
+    padding: 15px;
+    border: 1px solid rgb(235, 235, 235);
+    background: #f9f9fa;
+    margin: 0 auto;
+    outline: none;
+    color: rgb(128, 128, 128);
+    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #f9f9fa;
+    background-size: 11px;
+    background-position: 95%;
+    -webkit-appearance: none;
 }
