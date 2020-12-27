@@ -8,68 +8,35 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-const Posts = ({ posts, allPosts}) => {
-	const router = useRouter();
+const Posts = ({ posts }) => {
 
-	let postsToLoad = 2
-	let PostsPerPage = 2
-	const [load, setLoad] = useState(PostsPerPage);
+	const [myPosts, setMyPosts] = useState(posts);
+
 	const [activeFilter, setActiveFilter] = useState({
 		title: '',
 		title2: ''
 	})
-	const [myPosts, setMyPosts] = useState(posts);
 
 	useEffect(() => {
-		if(activeFilter.title != '' || activeFilter.title2 != ''){
-			setMyPosts(
-				posts.filter( post => 
-					post.title.toLowerCase().includes(activeFilter.title)
-					&& post.title.toLowerCase().includes(activeFilter.title2)
-				)
-			)
-		}
-		if(activeFilter.title == '' && activeFilter.title2 == ''){
-			setMyPosts(posts)
-
-		}
+		setMyPosts( 
+			posts.filter( post => post.title.toLowerCase().includes(activeFilter.title) 
+			   && post.title.toLowerCase().includes(activeFilter.title2)
+		    )
+		)
 	}, [activeFilter])
 
-	useEffect( ()=>{
-		if(router.query.posts){
-			setLoad(+router.query.posts)
-		}
-	},[router]) 
-
-	const loadMorePosts = () => {
-		let lastPost = posts[load - postsToLoad + 1].title;
-		
-		const allA = document.querySelectorAll('.test')
-		allA.forEach( x => {
-			if(x.querySelector('p').innerText == lastPost){
-				x.setAttribute('id', 'scroll');
-			}else{
-				x.removeAttribute("id")
-			}
-		})
-
-		setLoad(load + postsToLoad)
-		router.push(`?posts=${load + postsToLoad}`)
-	}
-
-		function handleSearch(e){
-			setMyPosts(posts)
-			setMyPosts( posts.filter( post => post.title.toUpperCase().includes(e.target.value.toUpperCase())) )
-		}
-
 		function handleOption(e){
-			if(e.target.id== 'option'){
+			if(e.target.id == 'option'){
 				setActiveFilter({...activeFilter, title: e.target.value.toLowerCase()})
 			}
-			if(e.target.id== 'option2'){
+			if(e.target.id == 'option2'){
 				setActiveFilter({...activeFilter, title2: e.target.value.toLowerCase()})
 			}
 		}
+
+		useEffect( () => {
+			console.log(activeFilter)
+		},[activeFilter])
 	
 	return(
 		<>
@@ -77,7 +44,7 @@ const Posts = ({ posts, allPosts}) => {
 			<title>Posts</title>
 		</Head>
 			<Container>
-			
+			<Flex>
 			<select onChange={handleOption} id="option">
 				<option value="" selected>Select option</option>
 				<option value="New">New</option>
@@ -89,12 +56,10 @@ const Posts = ({ posts, allPosts}) => {
 				<option value="New">New</option>
 				<option value="17">17</option>
 			</select>
-
-				<input type="search" onChange={handleSearch} placeholder="Search Posts"/>
-				
-				
+			</Flex>
 				<Flex>
-						{myPosts.slice(0,load).map( post => (
+					<p style={{textAlign: 'center', width: '100%'}}>{myPosts.length == 0 && 'Nema postova'}</p>
+						{myPosts.map( post => (
 							<Card key={post.id}  id={post.id}>
 								<Link href={ `/blog/${ post.slug }` }>
 									<a className="test" id={post.id}>
@@ -107,7 +72,7 @@ const Posts = ({ posts, allPosts}) => {
 							</Card>
 						))}
 				</Flex>
-				<a href="#scroll"><button onClick={loadMorePosts} className={load >= allPosts ? 'erase' : 'active'} >LOAD MORE</button></a>
+
 			</Container>
 			<style global jsx>
    {`
