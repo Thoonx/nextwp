@@ -39,7 +39,7 @@ img{
     border-radius: 75px;
     font-size: 12px;
 }
-button{
+button, input[type="submit"]{
   padding: 15px 30px;
   border-radius: 30px;
   border: 0;
@@ -67,7 +67,7 @@ button:disabled {
   margin: 0;
 }
 
-input[type="search"] {
+input[type="search"],input[type="text"] {
   height: 45px;
   width: 310px;
   border-radius: 36px;
@@ -82,6 +82,7 @@ input[type="search"] {
   color: rgb(128, 128, 128);
   opacity: 1; 
 }
+
 select{
 height: 45px;
     width: 310px;
