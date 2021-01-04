@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 
 const Posts = ({ posts, allPosts}) => {
 	const router = useRouter();
+	const { locale } = router;
 
 	let postsToLoad = 2
 	let PostsPerPage = 2
@@ -77,7 +78,7 @@ const Posts = ({ posts, allPosts}) => {
 			<title>Posts</title>
 		</Head>
 			<Container>
-			
+			{locale}
 			<select onChange={handleOption} id="option">
 				<option value="" selected>Select option</option>
 				<option value="New">New</option>

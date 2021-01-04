@@ -12,7 +12,8 @@ function ac_posts() {
 	$i = 0;
 
 	foreach($posts as $post) {
-		$data[$i]['acf'] = get_field('neki', $post->ID);
+		$data[$i]['acf']['title'] = get_field('neki', $post->ID);
+		$data[$i]['acf']['gallery'] = get_field('gal', $post->ID);
 		$data[$i]['date'] = $post->post_date;
 		$data[$i]['id'] = $post->ID;
 		$data[$i]['title'] = $post->post_title;
@@ -21,6 +22,10 @@ function ac_posts() {
 		$data[$i]['featured_image']['thumbnail'] = get_the_post_thumbnail_url($post->ID, 'thumbnail');
 		$data[$i]['featured_image']['medium'] = get_the_post_thumbnail_url($post->ID, 'medium');
 		$data[$i]['featured_image']['large'] = get_the_post_thumbnail_url($post->ID, 'large');
+		$data[$i]['featured_image']['next_post_size'] = get_the_post_thumbnail_url($post->ID, 'next-post-size');
+		$data[$i]['featured_image']['new_image_size'] = get_the_post_thumbnail_url($post->ID, 'new-image-size');
+		$data[$i]['featured_image']['next_thumbnail'] = get_the_post_thumbnail_url($post->ID, 'next-thumbnail');
+		$data[$i]['category'] = get_the_category($post->ID)[0]->name;
 		$i++;
 	}
 
@@ -35,7 +40,8 @@ function ac_post( $slug ) {
 
 	$post = get_posts($args);
 
-    $data['acf'] = get_field( "neki", $post[0]->ID );
+    $data['acf']['title'] = get_field( "neki", $post[0]->ID );
+	$data['acf']['gallery'] = get_field( "gal", $post[0]->ID );
 	$data['date'] = $post[0]->post_date;
 	$data['id'] = $post[0]->ID;
 	$data['title'] = $post[0]->post_title;
@@ -44,6 +50,7 @@ function ac_post( $slug ) {
 	$data['featured_image']['thumbnail'] = get_the_post_thumbnail_url($post[0]->ID, 'thumbnail');
 	$data['featured_image']['medium'] = get_the_post_thumbnail_url($post[0]->ID, 'medium');
 	$data['featured_image']['large'] = get_the_post_thumbnail_url($post[0]->ID, 'large');
+	$data['category'] = get_the_category($post[0]->ID)[0]->name;
 
 	return $data;
 }

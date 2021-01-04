@@ -12,6 +12,7 @@ const Posts = ({ posts }) => {
 const router = useRouter();
 
 	const [myPosts, setMyPosts] = useState(posts);
+	const [perPage, setPerPage] = useState(2)
 
 	const [activeFilter, setActiveFilter] = useState({
 		title: '',
@@ -35,7 +36,7 @@ const router = useRouter();
 			e.target.id == 'option2' &&
 				setActiveFilter({...activeFilter, title2: e.target.value.toLowerCase()})
 		}
-function runForm(e){
+function handleForm(e){
 	setActiveFilter({
 		title2: e.target.test2.value.toLowerCase(), 
 		title: e.target.test.value.toLowerCase(),
@@ -52,13 +53,13 @@ function runForm(e){
 		</Head>
 			<Container>
 			<Flex>
-				<form onSubmit={runForm}>
+				<form onSubmit={handleForm}>
 					<input type="text" name="test" id="" defaultValue="new" placeholder="Search posts"/>
 					<input type="text" name="test2" id="" defaultValue="post" placeholder="Search posts"/>
 						<label>
 							<input type="checkbox" name="test3" id="" defaultValue="time" /> Time
 						</label>
-					<input type="submit" value="submit" />
+					<input type="submit" value="Submit" />
 				</form>
 				
 			<select onChange={handleOption} id="option">
@@ -77,7 +78,7 @@ function runForm(e){
 			<Flex>
 				<p style={{textAlign: 'center', width: '100%'}}>{myPosts.length == 0 && 'Nema postova'}</p>
 			
-					{myPosts.map( post => (
+					{myPosts.slice(0,perPage).map( post => (
 						<Card key={post.id}  id={post.id}>
 							<Link href={ `/blog/${ post.slug }` }>
 								<a className="test" id={post.id}>
@@ -90,7 +91,9 @@ function runForm(e){
 						</Card>
 					))}
 			</Flex>
-
+			
+		
+<button onClick={() => setPerPage(prev => prev + 2 )} className={perPage >= myPosts.length && 'erase'}> Load more</button>
 			</Container>
 			<style global jsx>
    {`
